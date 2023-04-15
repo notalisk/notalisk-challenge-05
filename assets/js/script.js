@@ -30,13 +30,25 @@ $(function () {
 
   // save user input to local storage
   $("button").click(function() {
-    console.log("test");
     
+    var hour = $(this).parent().attr("id");
+    hour = hour.slice(5);
+
     var thisEvent = {
-      eventName: $(this).prev("textarea").text(),
-      time: $(this).attr("id")
+      eventName: $(this).prev("textarea").val(),
+      time: hour
     }
 
+    if (Array.isArray(calEvents)) {
+      calEvents.push(thisEvent);
+    } else {
+      calEvents = [""];
+      calEvents.push(thisEvent);
+      calEvents.splice(0, 1);
+    }
+    calEvents.push(thisEvent);
+
+    localStorage.setItem("calendarEvents", JSON.stringify(calEvents));
   });
 
   // check local storage for stored calendar entries
