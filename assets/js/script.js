@@ -20,4 +20,28 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+
+  var today = dayjs();
+
+  // set the date in the header
+  $("#currentDay").text(`Today is ${today.format("MMM D, YYYY")}`);
+
+  var calEvents = JSON.parse(localStorage.getItem("calendarEvents"));
+
+  // save user input to local storage
+  $("button").click(function() {
+    console.log("test");
+    
+    var thisEvent = {
+      eventName: $(this).prev("textarea").text(),
+      time: $(this).attr("id")
+    }
+
+  });
+
+  // check local storage for stored calendar entries
+  function renderUponLoad () {
+    var calEvents = JSON.parse(localStorage.getItem("calendarEvents"));
+  }
+
 });
