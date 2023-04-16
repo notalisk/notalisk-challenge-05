@@ -35,6 +35,10 @@ $(function () {
   function render () {
     var calEvents = JSON.parse(localStorage.getItem("calendarEvents"));
 
+    if (calEvents === null) {
+      return;
+    }
+
     for (var i = 0; i < calEvents.length; i++) {
       var eventTime = "hour-" + calEvents[i].time;
 
@@ -50,8 +54,10 @@ $(function () {
   render();
 
   // timer
-  var timerInterval = setInterval(render, 10000);
+  compare();
+  var timerInterval = setInterval(compare, 10000);
 
+  // choose what color to color a block depending on the current time
   function compare() {
     var blocks = $("button").parent();
     var ourHour = today.format("H");
